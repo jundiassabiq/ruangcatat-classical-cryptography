@@ -27,11 +27,10 @@ Menampilkan halaman RuangCatat: formulir catatan dan kunci, unggah file, hasil d
     <main class="mx-auto max-w-4xl space-y-5 px-5 py-7">
       <div>
         <h2 class="text-2xl font-semibold tracking-tight">
-          Catat sesi. Buka kembali saat dibutuhkan.
+          Catatan konseling
         </h2>
         <p class="mt-2 text-sm text-zinc-500">
-          Tuliskan ringkasan sesi dengan kode klien, lalu unduh catatan tersandi.
-          Untuk membacanya kembali, pilih file catatan dan gunakan tiga kunci yang sama.
+          Enkripsi catatan atau buka file dengan tiga kunci yang sama.
         </p>
       </div>
       <p
@@ -50,26 +49,25 @@ Menampilkan halaman RuangCatat: formulir catatan dan kunci, unggah file, hasil d
               maxlength="32"
               placeholder="Contoh: K-001"
           /></label>
-          <p class="text-xs text-zinc-500">Gunakan kode seperti K-001, tanpa nama asli klien.</p>
           <label class="label" for="note-text"
             >Catatan sesi konseling<textarea
               id="note-text"
               class="field min-h-32"
               rows="5"
-              placeholder="Contoh fiktif: Klien bercerita tentang tekanan belajar. Sesi membahas cara mengelola waktu. Tindak lanjut: mencoba jadwal belajar dan mengevaluasinya pada sesi berikutnya."
+              placeholder="Tulis ringkasan sesi konseling fiktif…"
             ></textarea>
           </label>
           <div>
             <input id="plain-file" type="file" accept=".txt,text/plain" class="sr-only" aria-label="Pilih catatan konseling dari file .txt" />
             <div id="plain-drop" class="drop-zone" role="button" tabindex="0" aria-controls="plain-file" aria-disabled="false" aria-describedby="plain-file-name">
-              <span class="block text-sm font-medium">Tarik catatan sesi (.txt) ke sini</span>
-              <span class="mt-1 block text-xs text-zinc-500">atau klik untuk memilih · maksimal 500 KB · teks UTF-8</span>
+              <span class="block text-sm font-medium">Tarik atau pilih file .txt</span>
+              <span class="mt-1 block text-xs text-zinc-500">UTF-8 · maks. 500 KB</span>
             </div>
-            <p id="plain-file-name" class="mt-2 break-all text-xs text-zinc-500" aria-live="polite">Sudah menulis catatan di file .txt? Muat di sini, lalu tinjau atau edit isinya.</p>
+            <p id="plain-file-name" class="mt-2 break-all text-xs text-zinc-500" aria-live="polite">Opsional: muat catatan dari file.</p>
           </div>
           <fieldset>
             <legend class="text-xs font-semibold">
-              Tiga kunci untuk catatan · huruf A–Z/a–z
+              Kunci · huruf A–Z/a–z
             </legend>
             <div class="mt-3 grid gap-3 sm:grid-cols-3">
               <label class="label"
@@ -105,52 +103,51 @@ Menampilkan halaman RuangCatat: formulir catatan dan kunci, unggah file, hasil d
           </fieldset>
           <div class="flex flex-wrap gap-2 border-b border-zinc-200 pb-5">
             <button id="encrypt" type="submit" class="primary">
-              Enkripsi & unduh catatan</button
+              Enkripsi & unduh</button
             ><button id="clear" type="button" class="secondary">
-              Bersihkan formulir
+              Bersihkan
             </button>
           </div>
           <div>
             <input id="cipher-file" type="file" accept=".json,application/json" class="sr-only" aria-label="Pilih file catatan konseling tersandi (.json)" />
             <div id="cipher-drop" class="drop-zone" role="button" tabindex="0" aria-controls="cipher-file" aria-disabled="false" aria-describedby="cipher-file-name">
-              <span class="block text-sm font-medium">Buka kembali catatan: tarik file .json ke sini</span>
-              <span class="mt-1 block text-xs text-zinc-500">atau klik untuk memilih · maksimal 1 MB</span>
+              <span class="block text-sm font-medium">Tarik atau pilih file tersandi .json</span>
+              <span class="mt-1 block text-xs text-zinc-500">Maks. 1 MB</span>
             </div>
             <div class="mt-3 flex flex-wrap items-center justify-between gap-3">
-              <p id="cipher-file-name" class="min-w-0 flex-1 break-all text-xs text-zinc-500" aria-live="polite">Belum ada file catatan yang dipilih.</p>
+              <p id="cipher-file-name" class="min-w-0 flex-1 break-all text-xs text-zinc-500" aria-live="polite">Belum ada file terpilih.</p>
               <button id="decrypt" type="button" class="primary" disabled>Buka catatan</button>
             </div>
           </div>
           <p class="text-xs leading-relaxed text-zinc-500">
-            Simpan file unduhan dan ingat ketiga kuncinya untuk membaca catatan kembali.
-            Server memproses catatan tanpa mengarsipkan isi atau kunci.
+            Simpan file dan ketiga kunci. Catatan tidak diarsipkan di server.
           </p>
         </form>
       </section>
       <section id="encryption-result" class="card" hidden aria-labelledby="encryption-title">
         <div class="border-b border-zinc-200 p-5">
-          <h2 id="encryption-title" class="text-sm font-semibold">Catatan sesi sebelum dan sesudah enkripsi</h2>
+          <h2 id="encryption-title" class="text-sm font-semibold">Hasil enkripsi</h2>
           <p id="encryption-code" class="mt-1 text-xs text-zinc-500"></p>
         </div>
         <div class="grid gap-4 p-5 sm:grid-cols-3">
           <div class="min-w-0 rounded-lg border border-zinc-200 bg-zinc-50 p-4">
-            <h3 class="mb-3 text-xs font-semibold">Catatan sesi · sebelum enkripsi</h3>
+            <h3 class="mb-3 text-xs font-semibold">Catatan asli</h3>
             <pre id="plaintext-preview" class="max-h-64 overflow-auto whitespace-pre-wrap break-all text-sm leading-relaxed"></pre>
           </div>
           <div class="min-w-0 rounded-lg border border-zinc-200 bg-zinc-50 p-4">
-            <h3 class="mb-3 text-xs font-semibold">Hasil tiga algoritma · sebelum encode</h3>
+            <h3 class="mb-3 text-xs font-semibold">Ciphertext sebelum encode</h3>
             <pre id="raw-ciphertext-preview" class="max-h-64 overflow-auto whitespace-pre-wrap break-all text-sm leading-relaxed"></pre>
           </div>
           <div class="min-w-0 rounded-lg border border-zinc-200 bg-zinc-50 p-4">
-            <h3 class="mb-3 text-xs font-semibold">Hasil encode · huruf A–Z</h3>
+            <h3 class="mb-3 text-xs font-semibold">Ciphertext A–Z</h3>
             <pre id="ciphertext-preview" class="max-h-64 overflow-auto whitespace-pre-wrap break-all text-sm leading-relaxed"></pre>
           </div>
         </div>
-        <p class="px-5 pb-5 text-xs leading-relaxed text-zinc-500">Ikuti perubahan isi catatan: teks asli → hasil Monoalfabetik, Vigenère, dan Transposisi Kolom → encoding A–Z. Ketiga panel hanya menampilkan isi catatan. Frekuensi dihitung dari hasil encode; file unduhan menyertakan kode klien dan penanda format yang ikut dienkripsi.</p>
+        <p class="px-5 pb-5 text-xs leading-relaxed text-zinc-500">Panel menampilkan isi catatan saja; file juga memuat kode klien yang dienkripsi.</p>
       </section>
       <section id="result" class="card" hidden>
         <div class="border-b border-zinc-200 p-5">
-          <h2 class="text-sm font-semibold">Catatan konseling yang dibuka kembali</h2>
+          <h2 class="text-sm font-semibold">Hasil dekripsi</h2>
           <p id="result-code" class="mt-1 text-xs text-zinc-500"></p>
         </div>
         <pre
@@ -159,9 +156,9 @@ Menampilkan halaman RuangCatat: formulir catatan dan kunci, unggah file, hasil d
         ></pre>
       </section>
       <details id="analysis" class="card">
-        <summary class="cursor-pointer p-5 text-sm font-medium">Analisis kriptanalisis catatan tersandi</summary>
+        <summary class="cursor-pointer p-5 text-sm font-medium">Analisis kriptanalisis</summary>
         <div class="border-t border-zinc-200 space-y-6 p-5">
-          <p id="frequency-info" class="text-xs text-zinc-500" aria-live="polite">Analisis muncul setelah catatan dienkripsi atau dibuka kembali.</p>
+          <p id="frequency-info" class="text-xs text-zinc-500" aria-live="polite">Enkripsi atau buka catatan untuk melihat analisis.</p>
           <div id="analysis-content" class="space-y-6" hidden>
             <section class="space-y-3" aria-labelledby="frequency-title">
               <div class="flex flex-wrap items-center justify-between gap-3">
@@ -173,7 +170,7 @@ Menampilkan halaman RuangCatat: formulir catatan dan kunci, unggah file, hasil d
                   </select>
                 </label>
               </div>
-              <p class="text-xs leading-relaxed text-zinc-500">Hanya cipherteks isi catatan yang dihitung. Kode klien dan JSON tidak ikut dihitung. Huruf besar/kecil digabung; karakter di luar A–Z diabaikan.</p>
+              <p class="text-xs leading-relaxed text-zinc-500">Menghitung A–Z dari isi catatan, tanpa metadata JSON.</p>
               <div id="frequency-table" class="max-h-64 overflow-auto" hidden>
                 <table class="w-full text-left text-xs">
                   <thead><tr class="border-b border-zinc-200"><th class="py-2">Huruf</th><th>Jumlah</th><th>Persentase</th></tr></thead>
@@ -181,47 +178,52 @@ Menampilkan halaman RuangCatat: formulir catatan dan kunci, unggah file, hasil d
                 </table>
               </div>
               <h4 class="text-xs font-semibold">Perbandingan distribusi huruf</h4>
-              <p class="text-xs text-zinc-500">Abu-abu: sebelum encode · Hitam: sesudah encode. Lebar batang memakai skala 0–100% yang sama; arahkan kursor untuk melihat jumlah.</p>
+              <p class="text-xs text-zinc-500">Abu-abu: sebelum encode · Hitam: sesudah encode · Skala 0–100%</p>
               <div id="frequency-chart" class="frequency-chart" tabindex="0" role="group" aria-label="Grafik frekuensi A sampai Z sebelum dan sesudah encode"></div>
-              <p class="text-xs leading-relaxed text-zinc-500">Encoding membentuk pola baru dan tidak menjamin distribusi lebih rata. Analisis ini tidak menemukan kunci atau membuka catatan otomatis.</p>
             </section>
             <section class="space-y-3 border-t border-zinc-200 pt-5" aria-labelledby="ic-title">
               <h3 id="ic-title" class="text-sm font-semibold">Index of Coincidence (IC)</h3>
-              <p class="text-xs leading-relaxed text-zinc-500">Indikator peluang dua huruf dari posisi berbeda memiliki nilai yang sama. IC = Σ f(f−1) / [N(N−1)].</p>
               <div class="grid gap-3 sm:grid-cols-2">
                 <div class="rounded-lg border border-zinc-200 bg-zinc-50 p-4"><p class="text-xs text-zinc-500">Sebelum encode</p><p id="ic-before" class="mt-2 text-lg font-semibold"></p><p id="ic-before-count" class="mt-1 text-xs text-zinc-500"></p></div>
                 <div class="rounded-lg border border-zinc-200 bg-zinc-50 p-4"><p class="text-xs text-zinc-500">Sesudah encode</p><p id="ic-after" class="mt-2 text-lg font-semibold"></p><p id="ic-after-count" class="mt-1 text-xs text-zinc-500"></p></div>
               </div>
-              <p class="text-xs leading-relaxed text-zinc-500">Acuan model huruf independen dan merata: 1/26 ≈ 0,0385. IC bukan nilai keamanan. Sampel pendek dapat berfluktuasi; IC sesudah encode juga dipengaruhi pola encoding. Kurang dari dua huruf ditampilkan sebagai data belum cukup.</p>
+              <p class="text-xs leading-relaxed text-zinc-500">IC menunjukkan pola pengulangan huruf, bukan tingkat keamanan.</p>
             </section>
             <section class="space-y-3 border-t border-zinc-200 pt-5" aria-labelledby="estimate-title">
               <h3 id="estimate-title" class="text-sm font-semibold">Estimasi brute force Vigenère</h3>
-              <p class="text-xs leading-relaxed text-zinc-500">Simulasi matematis: kunci Monoalfabetik dan Transposisi dianggap diketahui, panjang Vigenère diketahui, dan setiap kandidat A–Z sama mungkin. Kandidat dicoba tanpa pengulangan. Ini bukan serangan nyata atau estimasi keamanan seluruh rangkaian.</p>
-              <p class="text-xs">Panjang kunci Vigenère saat proses: <strong id="estimate-length"></strong></p>
+              <p class="text-xs leading-relaxed text-zinc-500">Simulasi Vigenère saja; dua kunci lainnya dianggap diketahui.</p>
+              <p class="text-xs">Panjang kunci: <strong id="estimate-length"></strong></p>
               <form id="estimate-form" class="grid gap-3 sm:grid-cols-2">
-                <label class="label" for="estimate-rate">Asumsi percobaan per detik<input id="estimate-rate" class="field" type="number" min="1" max="1000000000000" step="1" value="1000000" required /></label>
-                <label class="label" for="estimate-seconds">Durasi percobaan (detik)<input id="estimate-seconds" class="field" type="number" min="1" max="1000000000000" step="1" value="60" required /></label>
+                <label class="label" for="estimate-rate">Percobaan/detik (asumsi)<input id="estimate-rate" class="field" type="number" min="1" max="1000000000000" step="1" value="1000000" required /></label>
+                <label class="label" for="estimate-seconds">Durasi (detik)<input id="estimate-seconds" class="field" type="number" min="1" max="1000000000000" step="1" value="60" required /></label>
                 <div><button id="estimate-submit" class="secondary" type="submit">Hitung estimasi</button></div>
               </form>
               <p id="estimate-error" class="text-xs text-red-800" role="alert" hidden></p>
               <div id="estimate-result" class="space-y-3 rounded-lg border border-zinc-200 bg-zinc-50 p-4" aria-live="polite" hidden>
                 <dl class="estimate-grid">
                   <dt>Jumlah kandidat (26ᴸ)</dt><dd id="estimate-space"></dd>
-                  <dt>Kandidat berbeda yang dicoba</dt><dd id="estimate-attempts"></dd>
+                  <dt>Kandidat tercakup</dt><dd id="estimate-attempts"></dd>
                   <dt>Peluang kunci tercakup</dt><dd id="estimate-probability"></dd>
-                  <dt>Waktu rata-rata pencarian</dt><dd id="estimate-average"></dd>
+                  <dt>Waktu rata-rata</dt><dd id="estimate-average"></dd>
                   <dt>Waktu seluruh kandidat</dt><dd id="estimate-full"></dd>
                 </dl>
               </div>
-              <p class="text-xs leading-relaxed text-zinc-500">N = 26ᴸ; B = min(R × durasi, N); P = B/N × 100%; waktu seluruh = N/R; waktu rata-rata = (N+1)/(2R). R adalah asumsi, bukan benchmark. Tahun dihitung sebagai 365,25 hari.</p>
-              <p class="text-xs leading-relaxed text-zinc-500">Peluang 100% berarti seluruh kandidat tercakup dalam model, bukan jaminan catatan dibobol. Mengenali hasil yang benar membutuhkan pemeriksaan tambahan; format JSON membantu tetapi bukan autentikasi. Encoding A–Z tidak memakai kunci dan tidak menambah keamanan.</p>
+              <p class="text-xs leading-relaxed text-zinc-500">Estimasi berdasarkan asumsi, bukan jaminan pembobolan.</p>
+              <details class="text-xs text-zinc-500">
+                <summary class="cursor-pointer">Rumus & asumsi</summary>
+                <div class="mt-3 space-y-3 leading-relaxed">
+                  <p>N = 26ᴸ; B = min(R × durasi, N); peluang = B/N × 100%; waktu seluruh = N/R; rata-rata = (N+1)/(2R).</p>
+                  <p>Panjang kunci diketahui. Kandidat A–Z dianggap sama mungkin dan dicoba tanpa pengulangan. R bukan hasil pengukuran; satu tahun = 365,25 hari.</p>
+                  <p>100% berarti seluruh kandidat tercakup. JSON bukan autentikasi; encoding A–Z tidak menambah keamanan.</p>
+                  <p>IC = Σ f(f−1) / [N(N−1)]. Acuan distribusi merata: 1/26 ≈ 0,0385. Sampel pendek dan encoding memengaruhi pola.</p>
+                </div>
+              </details>
             </section>
           </div>
         </div>
       </details>
       <footer class="text-xs leading-relaxed text-zinc-500">
-        Prototipe tugas kriptografi untuk catatan konseling fiktif; gunakan data contoh, bukan catatan klien sebenarnya.<br />
-        Enkripsi klasik: Monoalfabetik → Vigenère → Transposisi Kolom. Pemeriksaan format bukan autentikasi kriptografis.
+        Prototipe kriptografi klasik · Gunakan catatan fiktif.
       </footer>
     </main>
   </body>

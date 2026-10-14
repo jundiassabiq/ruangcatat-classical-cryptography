@@ -17,7 +17,7 @@ export function setAnalysisBusy(value) { mainBusy = value; lock(); }
 export function clearAnalysis() {
   current = null; revision++; estimating = false;
   $('frequency-body').replaceChildren(); $('frequency-table').hidden = true;
-  $('frequency-info').textContent = 'Analisis muncul setelah catatan dienkripsi atau dibuka kembali.';
+  $('frequency-info').textContent = 'Enkripsi atau buka catatan untuk melihat analisis.';
   $('analysis-content').hidden = true; $('frequency-chart').replaceChildren();
   $('estimate-form').reset(); $('estimate-result').hidden = true;
   $('estimate-error').hidden = true; $('estimate-error').textContent = '';
